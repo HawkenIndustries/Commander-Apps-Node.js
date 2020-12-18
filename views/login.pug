@@ -1,0 +1,41 @@
+doctype html
+
+include mixins
+
+html
+  
+  include head
+
+  body
+
+    main(style="padding-left:0px;")
+      div.main-icon
+        img(src="/images/KMCCommander-White-s.png" srcset="/images/kmclogo_white.svg" alt="KMC Commander Logo")
+      .valign-wrapper(style="padding-left:0;position:fixed;top:0;left:0;bottom:0;right:0;")
+        .valign.center-align(style='width:100%;')
+          .container
+            .row
+              .col.l4.push-l4.m6.push-m3.s12
+                .card.hoverable#setup
+                  .card-content(data-step='0')
+                    span.card-title Welcome
+                    .row(style='margin-bottom:0;')
+                      form(action='/login' method='post')
+                        .input-field.col.s12
+                          input#login-email(name='email', type='email')
+                          label(for='login-email') Email
+                        .input-field.col.s12
+                          input#login-password(name='password', type='password')
+                          label(for='login-password') Password
+                        .input-field.col.s12.l12
+                          button.blue.waves-effect.waves-light.btn#loginBtn(type='submit' value='Log In') Login
+                        .input-field.col.s12
+                          div.message.message-block.message-error.red.white-text
+                          if flashError
+                            div.alert-danger.red.white-text!= flashError
+                          if flashSuccess
+                            div.alert-success.green.white-text!= flashSuccess
+
+    include footer
+
+    script(src="/js/login.js")

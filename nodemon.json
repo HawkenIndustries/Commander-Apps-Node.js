@@ -1,0 +1,15 @@
+{
+	"verbose": false,
+	"ext": "ejs js styl pug json",
+	"exec": "npm start",
+	"ignore": [
+		".git",
+		"node_modules/*",
+		"tmp/*",
+		"build/*",
+		"views/*",
+		"public/js/*"
+	],
+	"env": {
+	}
+}

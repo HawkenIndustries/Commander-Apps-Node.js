@@ -1,0 +1,47 @@
+
+script(src="/js/jquery-2.1.4.min.js")
+script(src='/js/materialize.js')
+script(scr='/js/materialize-modification.js')
+script(src="/js/moment.min.js")
+
+script.
+	User = !{stringify(user||null)};
+
+	var logoutFunction = function(){
+		if($('#sidebar-projects-login-btn').attr('data-login')==="true"){
+			$.ajax({
+				type: 'POST',
+				url: '/logout',
+				success: function(data){
+					window.location = '/login';
+				}
+			}).fail(function(){
+				window.location = '/';
+			});
+		}else{
+			$.ajax({
+				type: 'POST',
+				url: '/logout',
+				success: function(data){
+					window.location = '/login';
+				}
+			}).fail(function(){
+				window.location = '/';
+			});
+		}
+	}
+
+script.
+	// you can add js code here
+	$('#logout-btn').click(function(){
+		$.ajax({
+			type: 'POST',
+			url: '/logout',
+			success: function(data){
+				window.location = '/login';
+			}
+		}).fail(function(){
+			window.location = '/';
+		});
+		return false;
+	});

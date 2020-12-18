@@ -1,0 +1,12 @@
+header
+	nav
+		.nav-wrapper
+			a.brandImageTheme(href='/', style='line-height:60px;').brand-logo App Name
+			ul#nav-mobile.hide-on-med-and-down.right
+				li
+					a(href='/') Home
+				if user
+					li
+						a#logout-btn(href="#")
+							i.ion-log-out(style='float:left;font-size:inherit;margin-right:8px;')
+							span Logout

@@ -1,0 +1,208 @@
+mixin candidate()
+	.candidate
+
+mixin numSelect(name, id, from, to)
+	select(id=id, name=name, class='form-control')
+		- var n = from
+			while n != to
+				option(value=n)!= n
+				if from < to
+					- n++
+				if from > to
+					- n--
+		option(value=to)!= to
+
+mixin monthSelect(name, id)
+	select(id=id, name=name, class='form-control')
+		option(value='January') January
+		option(value='February') February
+		option(value='March') March
+		option(value='April') April
+		option(value='May') May
+		option(value='June') June
+		option(value='July') July
+		option(value='August') August
+		option(value='September') September
+		option(value='October') October
+		option(value='November') November
+		option(value='December') December
+		
+mixin numSelectSimple(def, from, to)
+	select(class='form-control')
+		option(selected, value='')!= def
+		- var n = from
+			while n != to
+				option(value=n)!= n
+				if from < to
+					- n++
+				if from > to
+					- n--
+		option(value=to)!= to
+
+mixin monthSelectSimple(def)
+	select(class='form-control')
+		option(selected)!= def
+		option(value='January') January
+		option(value='February') February
+		option(value='March') March
+		option(value='April') April
+		option(value='May') May
+		option(value='June') June
+		option(value='July') July
+		option(value='August') August
+		option(value='September') September
+		option(value='October') October
+		option(value='November') November
+		option(value='December') December
+
+mixin confirmModal(objectName,action,options)
+	- var options = options || {};
+	- var title = options.title || "Confirm";
+	- var message = options.message || "";
+	- var buttonText = options.buttonText || "OK";
+	- var glyphicon = options.glyphicon || "ion-alert-circled"
+	- var inputs = options.inputs || [];
+	div.modal.bottom-sheet(style='max-height:80%;z-index:1003 !important;overflow-y:scroll !important;' id=objectName+"-modal-"+action)
+		.modal-content
+			h4 
+				span(class=glyphicon)=" "+title
+				i(id=objectName+"-modal-"+action+"-"+"name") ERROR
+				- if(inputs.length ===0)
+					| ?
+			p(id=objectName+"-modal-"+action+"-message", style='padding:0 .75rem')=message
+			div.inputs
+				- for(var i=0;(i<inputs.length)&&inputs[i];i=i+2)
+					div.row
+						div.input-field.col.s6.m3
+							div(data-function='analog')
+								input(
+									id=(inputs[i].id ? objectName+"-modal-input-"+inputs[i].id:""),
+									name=inputs[i].id ? objectName+"-modal-input-"+inputs[i].id:inputs[i].name, 
+									type=inputs[i].type, 
+									autocomplete='off'
+								)
+								label(for=(inputs[i].id ? objectName+"-modal-input-"+inputs[i].id:""))=inputs[i].label||inputs[i].name
+								if inputs[i].example
+									p(
+										id=(inputs[i].id?objectName+'-modal-input-'+inputs[i].id+'example':''),
+										style='margin-top:-20px;'
+									)
+							div(data-function='binary', style='display:none;')
+								select(
+									id=(inputs[i].id ? objectName+"-modal-input-binary-"+inputs[i].id:""),
+									name=inputs[i].id ? objectName+"-modal-input-binary-"+inputs[i].id:inputs[i].name, 
+									type=inputs[i].type, 
+									autocomplete='off'
+								)
+								label(for=(inputs[i].id ? objectName+"-modal-input-binary-"+inputs[i].id:""))=inputs[i].label||inputs[i].name
+							- if(inputs[i+1])
+								div(data-function=inputs[i+1].id ? inputs[i+1].id:"", style='display:none;')
+									input(
+										id=(inputs[i+1].id ? objectName+"-modal-input-"+inputs[i+1].id:""),
+										name=inputs[i+1].id ? objectName+"-modal-input-"+inputs[i+1].id:inputs[i+1].name, 
+										type=inputs[i+1].type, 
+										autocomplete='off'
+									)
+									label(for=inputs[i+1].id ? objectName+"-modal-input-"+inputs[i+1].id:inputs[i+1].name)=inputs[i+1].label||inputs[i+1].name
+		.modal-footer
+			span(id=objectName+"-modal-"+action+"-status", style='margin-right:6px;')
+			if options.blueConfirm
+				a.modal-action.modal-close.red.waves-effect.waves-light.btn Cancel
+				a.btn.blue.waves-effect.waves-light(id=objectName+"-modal-"+action+"-btn")=buttonText
+			else
+				a.modal-action.modal-close.blue.waves-effect.waves-light.btn Cancel
+				a.btn.red.waves-effect.waves-light(id=objectName+"-modal-"+action+"-btn")=buttonText
+
+mixin cloudLoginModal()
+	-var modalName="cloudLoginModal"
+	.modal(id=modalName)
+		.modal-content()
+			h4 Log into Projects Server
+			h4(id=modalName+"-status")
+			p(id=objectName+"-message")
+			form(id=modalName+"-form")
+				.row
+					.input-field.col.s6
+						input(name=modalName+'-username', type='text' autocomplete="off" id=modalName+'-username')
+						label(for=''+modalName+'-username') Username
+					.input-field.col.s6
+						input(name=modalName+'-password', type='password' autocomplete="off" id=modalName+'-password')
+						label(for=''+modalName+'-password') Password
+		.modal-footer
+			a.modal-action.modal-close.waves-effect.waves-light.btn.red Cancel
+			a.btn.blue.waves-effect.waves-light(id=modalName+'-login-btn') Login
+			
+mixin passwordResetModal()
+	-var modalName="passwordResetModal"
+	.modal(id=modalName)
+		.modal-content()
+			h4 Enter your email to recover your password.
+			form(id="passwordResetModal-form")
+				.row
+					.input-field.col.s6
+						input(name='passwordResetModal-username', type='text' autocomplete="off", id='passwordResetModal-username')
+						label(for='passwordResetModal-username') Email
+		.modal-footer
+			a.btn.blue.waves-effect.waves-light(style='float:right;',id='passwordResetModal-submit-btn',name='submit') Submit
+			p(id='errorbar', style='float:right;color:#e9e5f8;margin:11px 0px;margin-right:14px;') Filler text
+			
+mixin addNewDataFieldModal()
+	-var modalName="addNewDataFieldModal"
+	.modal(id=modalName)
+		.modal-content()
+			h4 Add a tag to this object
+			form(id="addNewDataFieldModal-form")
+				.row
+					.input-field.col.s6
+						select#addNewDataFieldModal-tagtype
+							option(value='', selected, disabled) Choose an option
+							option(value='Marker') Marker
+							option(value='Bool') Bool
+							option(value='Number') Number
+							option(value='Str') Str
+							option(value='Ref') Ref
+							option(value='Coord') Coord
+							option(value='List') List
+						label(for='addNewDataFieldModal-tagtype') Type
+				.row
+					.input-field.col.s6
+						input(name='addNewDataFieldModal-point', type='text' autocomplete="off", id='addNewDataFieldModal-point')
+						label(for='addNewDataFieldModal-point') Tag
+					.input-field.col.s6
+						input(name='addNewDataFieldModal-value', type='text' autocomplete="off", id='addNewDataFieldModal-value')
+						label(for='addNewDataFieldModal-value') Value
+		.modal-footer
+			a.btn.blue.waves-effect.waves-light(style='float:right;',id='addNewDataFieldModal-submit-btn',name='submit') Submit
+			a.modal-action.modal-close.waves-effect.waves-light.btn.red(style='float:right;') Cancel 
+			a(style='float:right;color:#e9e5f8;margin:11px 0px;margin-right:14px;visibility:hidden;',id='addNewDataFieldModal-error-msg') None
+			
+mixin addNewDataObjectModal()
+	-var modalName="addNewDataObjectModal"
+	.modal(id=modalName)
+		.modal-content()
+			h4 Add a tag to your new object 
+			form(id="addNewDataObjectModal-form")
+				.row
+					.input-field.col.s6
+						select#addNewDataObjectModal-tagtype
+							option(value='', selected, disabled) Choose an option
+							option(value='Marker') Marker
+							option(value='Bool') Bool
+							option(value='Number') Number
+							option(value='Str') Str
+							option(value='Ref') Ref
+							option(value='Coord') Coord
+							option(value='List') List
+						label(for='addNewDataObjectModal-tagtype') Type
+				.row
+					.input-field.col.s6
+						input(name='addNewDataObjectModal-point', type='text' autocomplete="off", id='addNewDataObjectModal-point')
+						label(for='addNewDataObjectModal-point') Tag
+					.input-field.col.s6
+						input(name='addNewDataObjectModal-value', type='text' autocomplete="off", id='addNewDataObjectModal-value')
+						label(for='addNewDataObjectModal-value') Value
+		.modal-footer
+			a.btn.blue.waves-effect.waves-light(style='float:right;',id='addNewDataObjectModal-submit-btn',name='submit') Submit
+			a.modal-action.modal-close.waves-effect.waves-light.btn.red(style='float:right;') Cancel 
+			a(style='float:right;color:#e9e5f8;margin:11px 0px;margin-right:14px;visibility:hidden;',id='addNewDataObjectModal-error-msg') None
+

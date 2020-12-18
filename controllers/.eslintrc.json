@@ -1,0 +1,14 @@
+{   
+    "extends":[
+        "../eslintDefaults.js"
+    ],
+    "env": {
+        "node": true
+    },
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "rules": {
+        "no-inner-declarations":"off"
+    }
+}

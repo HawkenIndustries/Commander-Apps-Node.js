@@ -1,0 +1,39 @@
+{
+  "name": "Commander Apps Node.js",
+  "scripts": {},
+  "env": {
+    "COMMANDER_JWT": {
+      "description": "Your project-specific Commander authentication token.",
+      "required": true
+    },
+    "USER_EMAIL": {
+      "description": "The email/login for the default login user.",
+      "required": true
+    },
+    "USER_PASSWORD": {
+      "description": "The password for the default login user.",
+      "required": true
+    },
+    "COOKIE_SECRET": {
+      "description": "The secret used for encrypting session cookies.",
+      "generator": "secret"
+    }
+  },
+  "formation": {
+    "worker": {
+      "quantity": 0
+    },
+    "web": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "addons": [
+    "rediscloud:30"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+doctype html
+html
+  include head
+  body
+    main
+      .container
+        if(title)
+            .row(style="margin-top:1.14rem;")
+                .col.s12
+                    h4.title=title
+        .row(style="margin-bottom:0px;")
+          .col.s12.m6
+            if flashError
+              div.alert.alert-danger!= flashError
+            if flashSuccess
+              div.alert.alert-success!= flashSuccess
+        if(message)
+          .row
+            .col.s12=message
+    include footer

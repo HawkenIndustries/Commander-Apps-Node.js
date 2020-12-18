@@ -1,0 +1,284 @@
+@require "-header"
+@require "-footer"
+
+rhythm(_ratio, _line-height)
+  font-size (_line-height * _ratio)
+  line-height _line-height
+
+brandColor = #0099ff
+
+primaryColor = #e9e5f8
+secondaryColor = #9795ce
+backgroundColor = #010e18
+secondaryBackgroundColor = #03253f
+foregroundColor = #085691
+secondaryForegroundColor = #03253f
+
+brandRed = #E57373
+brandGreen = #81C784
+brandGray = rgb(151,154,153)
+brandGrayDark = rgb(101,104,103)
+brandYellow = #fff176
+
+html
+  font-size 100%
+  //- font declarations
+  color primaryColor
+  font-weight 400
+  font-family 'Open Sans', sans-serif
+  font-smoothing antialiased
+  -moz-osx-font-smoothing grayscale
+  ion-font()
+
+html *
+  //- don't show outlines
+  outline 0
+
+body
+
+  .row
+    /*
+      Autofill Colorings
+      This gets rid of the yellow background and changes the text color.
+    */
+    input,select
+      &:-webkit-autofill
+        -webkit-box-shadow: 0 0 0 1000px foregroundColor inset !important;
+        -webkit-text-fill-color: primaryColor;
+        transition: background-color 100000000s ease-in-out 0s; // Basically sets it to never transition to yellow.
+        -webkit-animation: 1ms void-animation-out;
+
+  background-color backgroundColor
+  font-weight 400
+  font-family 'Open Sans', sans-serif
+  // modals here
+
+  -header()
+
+  & > main, & > header, & > footer
+    //- page content here
+    @media only screen and (max-width: 992px)
+      padding-left 0
+    .container
+      @media only screen and (min-width: 993px)
+        width 95%
+        max-width inherit
+
+  -footer()
+
+h1, h2, h3, h4, h5, h6
+  font-weight 300
+
+h4.title
+  margin-bottom: 0px
+  display: inline-block
+
+.input-field label:not(.active):after // Fix materialize label https://stackoverflow.com/a/44243830/2446254
+  font-size 0.8rem
+  -webkit-transform translateY(-140%)
+  -moz-transform translateY(-140%)
+  -ms-transform translateY(-140%)
+  -o-transform translateY(-140%)
+  transform translateY(-140%)
+
+// Materialize Edits
+
+// Chrome Autofill Active Translate (LastPass works OK)
+// Similar fix to:
+// https://github.com/Dogfalo/materialize/commit/573e754a822c1cbf963f50d5ae6c0a249787b607#diff-efee1af48a0ccb80bb0654450459206e
+.input-field
+  & > input[type]:-webkit-autofill:not(.browser-default) + label
+    transform: translateY(-28px) scale(1);
+    transform-origin: 0 0;
+
+// Change checkbox highlighting color
+[type="checkbox"]:checked+label:before {
+  border-right: 2px solid brandColor;
+  border-bottom: 2px solid brandColor;
+}
+
+// Change focus highlighting
+input:not([type]):focus:not([readonly]), input[type="text"]:not(.browser-default):focus:not([readonly]), input[type="password"]:not(.browser-default):focus:not([readonly]), input[type="email"]:not(.browser-default):focus:not([readonly]), input[type="url"]:not(.browser-default):focus:not([readonly]), input[type="time"]:not(.browser-default):focus:not([readonly]), input[type="date"]:not(.browser-default):focus:not([readonly]), input[type="datetime"]:not(.browser-default):focus:not([readonly]), input[type="datetime-local"]:not(.browser-default):focus:not([readonly]), input[type="tel"]:not(.browser-default):focus:not([readonly]), input[type="number"]:not(.browser-default):focus:not([readonly]), input[type="search"]:not(.browser-default):focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly])
+  border-bottom 1px solid brandColor
+  box-shadow 0 1px 0 0 brandColor
+
+input:not([type]):focus:not([readonly]) + label, input[type="text"]:not(.browser-default):focus:not([readonly]) + label, input[type="password"]:not(.browser-default):focus:not([readonly]) + label, input[type="email"]:not(.browser-default):focus:not([readonly]) + label, input[type="url"]:not(.browser-default):focus:not([readonly]) + label, input[type="time"]:not(.browser-default):focus:not([readonly]) + label, input[type="date"]:not(.browser-default):focus:not([readonly]) + label, input[type="datetime"]:not(.browser-default):focus:not([readonly]) + label, input[type="datetime-local"]:not(.browser-default):focus:not([readonly]) + label, input[type="tel"]:not(.browser-default):focus:not([readonly]) + label, input[type="number"]:not(.browser-default):focus:not([readonly]) + label, input[type="search"]:not(.browser-default):focus:not([readonly]) + label, textarea.materialize-textarea:focus:not([readonly]) + label
+  color brandColor
+
+// Change Error Text Position
+input:not([type])+label:after, input[type=text]:not(.browser-default)+label:after, input[type=password]:not(.browser-default)+label:after, input[type=email]:not(.browser-default)+label:after, input[type=url]:not(.browser-default)+label:after, input[type=time]:not(.browser-default)+label:after, input[type=date]:not(.browser-default)+label:after, input[type=datetime]:not(.browser-default)+label:after, input[type=datetime-local]:not(.browser-default)+label:after, input[type=tel]:not(.browser-default)+label:after, input[type=number]:not(.browser-default)+label:after, input[type=search]:not(.browser-default)+label:after, textarea.materialize-textarea+label:after
+  top 65px
+
+disabledInputColor(mainColor,borderColor)
+  input:not([type]):disabled, input:not([type])[readonly="readonly"], input[type=text]:not(.browser-default):disabled, input[type=text]:not(.browser-default)[readonly="readonly"], input[type=password]:not(.browser-default):disabled, input[type=password]:not(.browser-default)[readonly="readonly"], input[type=email]:not(.browser-default):disabled, input[type=email]:not(.browser-default)[readonly="readonly"], input[type=url]:not(.browser-default):disabled, input[type=url]:not(.browser-default)[readonly="readonly"], input[type=time]:not(.browser-default):disabled, input[type=time]:not(.browser-default)[readonly="readonly"], input[type=date]:not(.browser-default):disabled, input[type=date]:not(.browser-default)[readonly="readonly"], input[type=datetime]:not(.browser-default):disabled, input[type=datetime]:not(.browser-default)[readonly="readonly"], input[type=datetime-local]:not(.browser-default):disabled, input[type=datetime-local]:not(.browser-default)[readonly="readonly"], input[type=tel]:not(.browser-default):disabled, input[type=tel]:not(.browser-default)[readonly="readonly"], input[type=number]:not(.browser-default):disabled, input[type=number]:not(.browser-default)[readonly="readonly"], input[type=search]:not(.browser-default):disabled, input[type=search]:not(.browser-default)[readonly="readonly"], textarea.materialize-textarea:disabled, textarea.materialize-textarea[readonly="readonly"]
+    color: mainColor
+    border-bottom: 1px solid borderColor;
+
+disabledInputColor(brandGrayDark,rgba(0,0,0,0.42))
+
+
+input:not([type]):disabled+label, input:not([type])[readonly="readonly"]+label, input[type=text]:not(.browser-default):disabled+label, input[type=text]:not(.browser-default)[readonly="readonly"]+label, input[type=password]:not(.browser-default):disabled+label, input[type=password]:not(.browser-default)[readonly="readonly"]+label, input[type=email]:not(.browser-default):disabled+label, input[type=email]:not(.browser-default)[readonly="readonly"]+label, input[type=url]:not(.browser-default):disabled+label, input[type=url]:not(.browser-default)[readonly="readonly"]+label, input[type=time]:not(.browser-default):disabled+label, input[type=time]:not(.browser-default)[readonly="readonly"]+label, input[type=date]:not(.browser-default):disabled+label, input[type=date]:not(.browser-default)[readonly="readonly"]+label, input[type=datetime]:not(.browser-default):disabled+label, input[type=datetime]:not(.browser-default)[readonly="readonly"]+label, input[type=datetime-local]:not(.browser-default):disabled+label, input[type=datetime-local]:not(.browser-default)[readonly="readonly"]+label, input[type=tel]:not(.browser-default):disabled+label, input[type=tel]:not(.browser-default)[readonly="readonly"]+label, input[type=number]:not(.browser-default):disabled+label, input[type=number]:not(.browser-default)[readonly="readonly"]+label, input[type=search]:not(.browser-default):disabled+label, input[type=search]:not(.browser-default)[readonly="readonly"]+label, textarea.materialize-textarea:disabled+label, textarea.materialize-textarea[readonly="readonly"]+label
+  color rgba(128,128,128,.8);
+
+table.highlight
+  td
+    border-radius 0
+  th
+    border-radius 0
+
+table.highlight>tbody>tr:hover
+  background-color #085691
+
+table.small
+  td
+    padding 10px 5px
+table.xsmall
+  td
+    padding 5px 5px
+
+.input-field > label // for jQueryValidation on Standard input/label formats.
+  width 100%
+  padding-right 1.5rem
+  &:after
+    padding-top: 3px;
+
+.btn.foregroundColor
+  &:hover
+    background-color lighten(foregroundColor, 10%)
+  &:focus
+    background-color darken(foregroundColor, 10%)
+
+*::-webkit-scrollbar
+  background-color rgba(0,0,0,0.3)
+*::-webkit-scrollbar-corner
+  background-color secondaryForegroundColor
+*::-webkit-scrollbar-thumb
+  background-color foregroundColor
+  box-shadow 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.3)
+
+table.striped.secondaryForegroundColor
+  &>tbody
+    &>tr:nth-child(odd)
+      background-color foregroundColor
+    &>tr:nth-child(even)
+      background-color secondaryForegroundColor
+table.highlight.secondaryForegroundColor
+  border-bottom none
+  display block
+  width 100%
+  &>tbody
+    &>tr:hover
+      background-color foregroundColor
+
+.foregroundColorBorder
+  border 1px solid foregroundColor
+  &.secondaryForegroundColor
+    border 1px solid foregroundColor
+
+.text-ellipsis
+  overflow hidden
+  text-overflow ellipsis
+  white-space nowrap
+
+.text-left
+  text-align left
+.text-right
+  text-align right
+
+ul.collapsible
+  border 0
+  .disabled,.disabled:hover
+    .collapsible-header
+      background-color brandGrayDark
+      border-top-color brandGrayDark
+      border-right-color brandGrayDark
+      border-bottom-color brandGrayDark
+      border-left-color brandGray
+
+
+.border-left-red
+  border-left-color brandRed !important
+.border-left-green
+  border-left-color brandGreen !important
+.border-left-yellow
+  border-left-color brandYellow !important
+
+.card
+  background-color foregroundColor
+  .card-header
+    position relative
+    background-color inherit
+    border-bottom 1px solid rgba(160,160,160,0.2)
+    padding 20px
+
+.btn, .btn-large, .btn-flat
+  text-transform none
+  margin 0px 2px
+  &.no-margin
+    margin: 0px;
+
+.btn-sm
+  height 28px
+  line-height 28px
+  padding 0 1rem
+
+// Globally saying that all flat button text/icons should be white.
+a.btn-flat
+  color #f
+
+.main-icon
+  display inline-block
+  position relative
+  left 0px;
+  top 0px;
+  img
+    position relative;
+    top 8px;
+    left 16px;
+    height  50px;
+
+.app-title
+  line-height 48px
+  font-size 24px
+  // font-weight 300
+  font-weight 400
+
+.loadable
+  display none
+
+.pointView
+  td
+    padding-top 0
+    padding-bottom 0
+  .badge
+    float left
+    margin-left 0
+    margin-right 14px
+    margin-top 2px
+    margin-bottom 2px
+    line-height 18px
+.pointView-haskind
+    background-color #563671
+.pointView.hidden
+  display none
+
+.secondary-content
+  max-height 45px
+  .select-wrapper
+    float left
+    max-height 45px
+    top -6px
+    // right 14px
+
+.modal-large
+  width 80%
+  &.modal-fixed-footer
+    height 90%
+    max-height 90%
+    top 5% !important
+
+.modal-small
+  max-height 40%
+  .modal-content
+    [data-title]
+      margin-bottom: 10px

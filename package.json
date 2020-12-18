@@ -1,0 +1,65 @@
+{
+  "name": "commander-apps-nodejs",
+  "version": "0.9.0",
+  "description": "Commander Apps Node.js",
+  "main": "root.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "engines": {
+    "node": "12.18.4",
+    "npm": "6.14.6"
+  },
+  "scripts": {
+    "start": "node root.js",
+    "dev": "NODE_ENV=development nodemon"
+  },
+  "author": "HawkenIO",
+  "license": "MIT",
+  "homepage": "https://hawkenio.com",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "bluebird": "3.1.1",
+    "body-parser": "1.18.3",
+    "compression": "1.7.3",
+    "connect-redis": "3.0.1",
+    "convert-string": "0.1.0",
+    "cookie-parser": "1.4.0",
+    "dotenv": "8.2.0",
+    "errorhandler": "1.5.0",
+    "express": "4.16.4",
+    "express-fileupload": "1.1.9",
+    "express-flash": "0.0.2",
+    "express-minify": "0.1.6",
+    "express-session": "1.15.6",
+    "localStorage": "1.0.3",
+    "lodash": "4.17.20",
+    "memorystore": "1.6.4",
+    "moment": "2.22.1",
+    "multer": "1.1.0",
+    "newrelic": "6.6.0",
+    "nib": "1.1.2",
+    "node-uuid": "1.4.8",
+    "passport": "0.3.2",
+    "passport-local": "1.0.0",
+    "pug": "2.0.3",
+    "pug-plain-loader": "1.0.0",
+    "redis": "2.3.0",
+    "request": "2.88.0",
+    "request-promise-native": "1.0.5",
+    "serve-favicon": "2.5.0",
+    "serve-static": "1.13.2",
+    "stylus": "0.54.8",
+    "stylus-loader": "3.0.2",
+    "throng": "4.0.0",
+    "webpack-sources": "1.0.1",
+    "winston": "2.3.1",
+    "winston-papertrail": "1.0.5"
+  },
+  "devDependencies": {
+    "eslint": "7.8.0",
+    "eslint-config-recommended": "4.0.0",
+    "eslint-plugin-jsdoc": "4.7.0",
+    "nodemon": "1.18.8"
+  }
+}

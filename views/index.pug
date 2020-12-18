@@ -1,0 +1,44 @@
+doctype html
+
+include mixins
+
+html
+  
+	include head
+
+	body
+
+		include header
+
+		main(style="padding-left:0px;")
+			.container
+				.row
+					.col.s12.m10.push-m1
+						h4 Project Viewer
+						p Press the button below to load project data from Commander.
+						.btn.blue.waves-effect.waves-light#loadDevices Load Devices
+						.btn.blue.waves-effect.waves-light#loadPoints Load Points
+				.row
+					.col.s12.m6.push-m1
+						#deviceViewer(style='display:none;')
+							h5 Devices
+							table.highlight
+								thead
+									tr
+										th Name
+										th ID
+								tbody#deviceTableBody
+						#pointViewer(style='display:none;')
+							h5 Points
+							table
+								thead
+									tr
+										th Name
+										th ID
+										th curVal
+										th Unit
+								tbody#pointTableBody
+
+		include footer
+
+		script(src="/js/index.js")
