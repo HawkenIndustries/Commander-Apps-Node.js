@@ -203,8 +203,8 @@ var init = async function(){
 		
 		let client = null;
 		if(NODE_ENV=='production'){
-			console.log(`Connecting to redis at ${process.env.REDIS_URL}`);
-			client = redis.createClient(process.env.REDIS_URL, {
+			console.log(`Connecting to redis at ${process.env.REDISCLOUD_URL}`);
+			client = redis.createClient(process.env.REDISCLOUD_URL, {
 				retry_strategy(options) {
 					if (options.error && options.error.code === 'ECONNREFUSED') {
 						// End reconnecting on a specific error and flush all commands with
@@ -217,10 +217,10 @@ var init = async function(){
 				}
 			});
 			client.on('ready',()=>{
-				console.log(`Connected to redis at ${process.env.REDIS_URL}`);
+				console.log(`Connected to redis at ${process.env.REDISCLOUD_URL}`);
 			});
 			client.on('error',()=>{
-				console.error(`Redis Client error at ${process.env.REDIS_URL}`);
+				console.error(`Redis Client error at ${process.env.REDISCLOUD_URL}`);
 			});
 		}
 
@@ -328,7 +328,7 @@ var init = async function(){
 			}else{
 				res.status(503);
 				if(err.message ==='no session'){
-					let redisUrl = new URL('',process.env.REDIS_URL);
+					let redisUrl = new URL('',process.env.REDISCLOUD_URL);
 					err.message=`Redis client error. Check Redis Database URL and Port connectivity:${redisUrl.host}`;
 				}
 				
