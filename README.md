@@ -2,6 +2,10 @@
 
 HawkenIO 2020
 
+# Deploy to Heroku in one click
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 # Getting Started
 
 Install [node](https://nodejs.org/en/download/) 12.14.0 or newer. Check your version with:
