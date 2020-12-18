@@ -22,6 +22,8 @@ $ npm install
 
 $ npm install --dev
 
+Copy .env.sample to a new file called .env, and fill it out as appropriate.
+
 Then, to start in development, type:
 
 $ npm run dev
