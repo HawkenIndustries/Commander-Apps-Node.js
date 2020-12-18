@@ -200,6 +200,7 @@ var init = async function(){
 		console.warn('dyno type '+ dynoType);
 
 		app.use(logger.middleware);
+		app.set('trust proxy', 1);
 		
 		let client = null;
 		if(NODE_ENV=='production'){
